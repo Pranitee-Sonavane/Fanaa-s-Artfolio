@@ -17,7 +17,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 1vw;
+    gap: 2vw;
     padding: 2vw;
 }
 @media (max-width: 768px) {
@@ -28,20 +28,25 @@
 }
 
 .image-box {
+    
     margin-top: 140px;
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     width: 48%;
-    height: 600px;
-    border-radius: 20px;
+    height: 550px;
+    border-radius: 40px;
     overflow: hidden;
     background-image: url("https://www.transparenttextures.com/patterns/asfalt-light.png");
     background-size: cover;
-    opacity: 0.5; /* Increase to make the grain effect stronger */
+    opacity: 0.9; /* Increase to make the grain effect stronger */
 }
 
+/* Target only the second .container (which contains the third and fourth images) */
+.container:nth-of-type(2) {
+    margin-top: -150px; /* Adjust this value to move 3rd & 4th images up */
+}
 
 .image-box img {
     width: 100%;
@@ -70,3 +75,16 @@
     font-size: 20px;
     font-weight: bold;
 }
+
+.image-box::before {
+
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Dark overlay */
+    z-index: 1; /* Ensure it is above the image but below the text */
+}
+
