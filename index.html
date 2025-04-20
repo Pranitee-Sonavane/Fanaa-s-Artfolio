@@ -209,6 +209,36 @@
       transform: translate3d(0, 0, 1em);
     }
 
+    /* Styles for the divider image effect */
+    .divider-container {
+      width: 100vw; /* Force full viewport width */
+      position: relative; /* Needed for horizontal centering trick */
+      left: 50%;
+      transform: translateX(-50%); /* Center the 100vw element */
+      overflow: hidden; /* CRITICAL: Clips the scaled image inside */
+      margin: 12rem 0; /* Vertical spacing, keeps it in flow */
+      line-height: 0; /* Prevent extra space */
+      /* Container itself does NOT move or scale */
+    }
+
+    #divider-image-inner {
+      display: block; /* Ensures proper block layout */
+      /* Ensure image covers container even when scaled */
+      min-width: 100%;
+      min-height: 100%;
+      object-fit: cover; /* Cover the container area */
+      height: auto; /* Maintain aspect ratio (overridden by object-fit if needed) */
+      transform-origin: center center; /* Scale from the center */
+      transition: transform 0.5s ease-out; /* Smooth transition for zoom */
+      /* Stronger old film / grainy filter */
+      
+      filter: contrast(120%) brightness(80%) saturate(150%) hue-rotate(150deg) blur(0.5px);
+      mix-blend-mode: screen;
+      background-color: #0a0a0a;
+      /* Default state: Start zoomed IN */
+      transform: scale(1.05);
+    }
+
   </style>
 </head>
 
@@ -226,7 +256,7 @@
   </header>
 
   <!-- Hero Section -->
-  <section class="text-center mt-32">
+  <section class="text-center mt-16">
     <p class="text-gray-400 text-sm tracking-widest">● AVAILABLE FOR FREELANCE</p>
     <div class="overflow-hidden">
       <h1 class="text-[140px] leading-none font-extrabold transform translate-y-full animate-slide-up">
@@ -240,9 +270,14 @@
     </div>
   </section>
 
-  <div class="flex justify-center mt-10 mb-6">
-      <img src="divider.png" alt="Art Divider" class="w-1/2 rounded-xl shadow-lg">
-    </div>
+  
+  
+
+  <!-- Divider Image Container (Stays fixed in the page flow, full viewport width) -->
+  <div class="divider-container">
+    <!-- Inner Image (This is what scales, but always covers the container) -->
+    <img id="divider-image-inner" src="divider.png" alt="Divider">
+  </div>
 
   <!-- Container for the 2 cards per row (6 cards total) -->
   <div id="card-container">
@@ -308,7 +343,6 @@
         <span>Open</span>
       </div>
     </div>
-  </div>
 
     <!-- Card 4 -->
     <div class="card">
@@ -372,7 +406,24 @@
         <span>Open</span>
       </div>
     </div>
-  </div>
+  </div> <!-- Moved this closing div tag here -->
+
+  <script>
+    // --- Divider Image Internal Zoom Effect ---
+    const dividerInnerImage = document.getElementById('divider-image-inner');
+    const zoomThreshold = 100; // Pixels from top to trigger zoom change
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > zoomThreshold) {
+        // Scrolled DOWN: Zoom OUT (scale image to normal size - still covers container)
+        dividerInnerImage.style.transform = 'scale(1)';
+      } else {
+        // Scrolled UP (near top): Zoom IN (scale image UP slightly)
+        dividerInnerImage.style.transform = 'scale(1.05)'; // Back to default zoomed-in state
+      }
+    });
+    // --- End Divider Image Internal Zoom Effect ---
+  </script>
 
 </body>
 </html>
