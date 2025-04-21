@@ -1,391 +1,198 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Fanaa's Artfolio</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap" rel="stylesheet">
-  <!-- <link rel="stylesheet" href="styles.css"> <-- Removed -->
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Fanaa's Artfolio</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap" rel="stylesheet">
 
-  <style>
-    @keyframes slideUp {
-      from { transform: translateY(100%); }
-      to { transform: translateY(0); }
-    }
+<link rel="stylesheet" href="styles.css">
 
-    .animate-slide-up {
-      animation: slideUp 1s ease-out forwards;
-    }
-
-    .delay-1 {
-      animation-delay: 0.5s;
-    }
-
-    * {
-      
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    /* Container for the grid of cards */
-    #card-container {
-      display: flex;
-      padding:50px;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      width: 100%;
-      margin-top: 40px;
-    }
-
-    /* Individual card styling */
-    .card {
-      display: flex;
-      flex-direction: column;
-      background-color: #242824;
-      padding: 10px;
-      border-radius: 6px;
-      height: max-content;
-      width: 48%; /* Set each card width to 48% of the container width */
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      margin-bottom: 5px; /* Add space between rows */
-      margin-top: 70px;
-      padding-bottom: 2%;
-      
-    }
-
-    /* The card header styling */
-    .card_form {
-      position: relative;
-      width: 100%;
-      height: 30em;
-      border-radius: 4px;
-      background-color: #9147ff;
-      transition: 0.2s ease-in-out;
-      overflow: hidden;
-    }
-
-    /* The text inside the header */
-    .card_form span {
-      font-size: 1.5em;
-      position: absolute;
-      inset: 0;
-      padding: 5px 10px;
-      color: #fff;
-      background-image: linear-gradient(to top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.7) 100%);
-      opacity: 0;
-      transition: all 0.2s ease-in-out;
-    }
-
-    /* Hover effect for the card */
-    .card:hover .card_form span,
-    .card:hover .card_data span {
-      opacity: 1;
-    }
-
-    /* Card data area */
-    .card_data {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .card_data span {
-      color: #9147ff;
-      display: flex;
-      align-items: center;
-      font-size: 0.9em;
-      transition: 0.2s ease-in-out;
-      opacity: 0;
-      cursor: pointer;
-    }
-
-    .card_data span:hover {
-      text-decoration: underline;
-    }
-
-    /* Styling for the text block */
-    .text {
-      display: flex;
-      justify-content: center;
-      flex-direction: column;
-      color: white;
-      font-size: larger;
-    }
-
-    .text_m {
-      font-size: 1.3em;
-    }
-
-    .text_s {
-      color: #9147ff;
-      font-size: 0.8em;
-    }
-
-    /* Cube styling for rotation effect */
-    .cube {
-      width: max-content;
-      height: 10px;
-      transition: all 0.2s;
-      transform-style: preserve-3d;
-    }
-
-    .card:hover .cube {
-      transform: rotateX(90deg);
-    }
-
-    /* Cube side styling */
-    .side {
-      width: max-content;
-      height: 1em;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      font-weight: bold;
-      padding-top: 5%;
-    }
-
-    /* Specific side transformations */
-    .top {
-      transform: rotateX(-90deg) translate3d(0, 0, 0em);
-    }
-
-    .front {
-      transform: translate3d(0, 0, 1em);
-    }
-
-    /* Wrapper for the sticky effect - Simplified */
-    .sticky-wrapper {
-       /* Keep margin */
-       margin-top: 12rem;
-       margin-bottom: 0;
-       /* Remove height and position relative */
-       /* height: calc(100vh + 50px); */
-       /* position: relative; */
-       /* Add a small initial height to push the image down slightly */
-       padding-bottom: 50px; /* Adjust this value for initial visibility */
-    }
-
-    /* Styles for the STICKY divider image container */
-    .divider-container {
-      width: 100%;
-      position: sticky; /* Stick directly within body flow */
-      top: 0; /* Stick to the top */
-      height: 100vh; /* Full height when sticky */
-      overflow: hidden;
-      z-index: 1; /* Behind next section */
-      position: relative; /* Needed for absolute positioning of image */
-    }
-
-    #divider-image-inner {
-      display: block; /* Ensures proper block layout */
-      /* Ensure image covers container even when scaled */
-      /* Position image absolutely within the container */
-      position: absolute;
-      bottom: 0; /* Align to the bottom of the container */
-      left: 0;
-      width: 100%; /* Ensure full width */
-      height: 100%; /* Match container height */
-      object-fit: cover; /* Cover the container area */
-      transform-origin: center center;
-      /* transition removed as it's not needed for this effect */
-      /* Stronger old film / grainy filter */
-      filter: contrast(120%) brightness(80%) saturate(150%) hue-rotate(150deg) blur(0.5px);
-      mix-blend-mode: screen;
-      background-color: #0a0a0a;
-      /* Default state: Start zoomed IN - REMOVED */
-    }
-
-    #next-section {
-      /* Ensure next section is above the sticky divider */
-      position: relative;
-      z-index: 10;
-      background-color: black; /* Ensure solid background to cover image */
-      /* Add negative margin-top to pull it up over the wrapper's padding */
-      margin-top: -50px; /* Should match the padding-bottom of the wrapper */
-    }
-
-
-  </style>
 </head>
 
 <body class="bg-black text-white">
-  <!-- Navbar -->
-  <header class="flex justify-between items-center p-6">
-    <div class="flex items-center space-x-2">
-      <span class="text-2xl">✦</span>
-      <span class="text-lg font-semibold">ARTFOLIO</span>
-    </div>
-    <nav class="flex items-center space-x-6">
-      <span class="text-sm">MENU</span>
-      <span class="text-sm">🔍</span>
-    </nav>
-  </header>
+<!-- Navbar -->
+<header class="flex justify-between items-center p-6">
+<div class="flex items-center space-x-2">
+<span class="text-2xl">✦</span>
+<span class="text-lg font-semibold">ARTFOLIO</span>
+</div>
+<nav class="flex items-center space-x-6">
+<span class="text-sm">MENU</span>
+<span class="text-sm">🔍</span>
+</nav>
+</header>
 
-  <!-- Hero Section -->
-  <section class="text-center mt-16">
-    <p class="text-gray-400 text-sm tracking-widest">● AVAILABLE FOR FREELANCE</p>
-    <div class="overflow-hidden">
-      <h1 class="text-[140px] leading-none font-extrabold transform translate-y-full animate-slide-up">
-        PRANITEE'S
-      </h1>
-    </div>
-    <div class="overflow-hidden -mt-4">
-      <h1 class="text-[140px] leading-none font-extrabold transform translate-y-full animate-slide-up delay-1">
-        ARTFOLIO
-      </h1>
-    </div>
-  </section>
+<!-- Hero Section -->
+<section class="text-center mt-16">
+<p class="text-gray-400 text-sm tracking-widest">● AVAILABLE FOR FREELANCE</p>
+<div class="overflow-hidden">
+<h1 class="text-[140px] leading-none font-extrabold transform translate-y-full animate-slide-up">
+PRANITEE'S
+</h1>
+</div>
+<div class="overflow-hidden -mt-4">
+<h1 class="text-[140px] leading-none font-extrabold transform translate-y-full animate-slide-up delay-1">
+ARTFOLIO
+</h1>
+</div>
+</section>
 
-  
-  
-  <!-- Wrapper to control initial height and sticky duration -->
-  <div class="sticky-wrapper">
-    <!-- Divider Image Container (This part becomes sticky) -->
-    <div class="divider-container">
-      <!-- Inner Image -->
-      <img id="divider-image-inner" src="divider.png" alt="Divider">
-    </div>
-  </div> <!-- End sticky-wrapper -->
 
-  <!-- Next Section (Appears after sticky-wrapper) -->
-  <section id="next-section" class="bg-black relative z-10 min-h-screen p-10">
-    <h2 class="text-5xl font-bold mb-6 text-center text-white">Artwork Collections</h2>
-    <!-- Container for the 2 cards per row (6 cards total) -->
-    <div id="card-container">
-      <!-- Card 1 -->
-      <div class="card">
-      <div class="card_form">
-        <span>The Graphite Chronicles</span>
-        <img src="graphite.png" alt="Graphite Sketch" style="width: 100%; height: 100%; object-fit: cover; border-radius: 4px;">
 
-      </div>
-      <div class="card_data">
-        <div class="data">
-          <div class="text">
-            <label class="text_m">The Art of Graphite</label>
-            <div class="cube text_s">
-              <label class="side front">View Collection</label>
+
+<!-- Divider Image Container (Stays fixed in the page flow, full viewport width) -->
+<div class="divider-container">
+<!-- Inner Image (This is what scales, but always covers the container) -->
+<img id="divider-image-inner" src="divider.png" alt="Divider">
+</div>
+
+<!-- Container for the 2 cards per row (6 cards total) -->
+<div id="card-container">
+<!-- Card 1 -->
+<div class="card">
+<div class="card_form">
+<span>The Graphite Chronicles</span>
+<img src="graphite.png" alt="Graphite Sketch" style="width: 100%; height: 100%; object-fit: cover; border-radius: 4px;">
+
+</div>
+<div class="card_data">
+<div class="data">
+<div class="text">
+<label class="text_m">The Art of Graphite</label>
+<div class="cube text_s">
+<label class="side front">View Collection</label>
               <label class="side top">Explore the subtle beauty of graphite.</label>
-            </div>
-          </div>
-        </div>
-        <span>Open</span>
-      </div>
-    </div>
+</div>
+</div>
+</div>
+<span>Open</span>
+</div>
+</div>
 
-    <!-- Card 2 -->
-    <div class="card">
-      <div class="card_form">
-        <span>Watercolor Whispers</span>
-        <img src="watercolor.png" alt="watercolors" style="width: 100%; height: 100%; object-fit: cover; border-radius: 4px;">
+<!-- Card 2 -->
+<div class="card">
+<div class="card_form">
+<span>Watercolor Whispers</span>
+<img src="watercolor.png" alt="watercolors" style="width: 100%; height: 100%; object-fit: cover; border-radius: 4px;">
 
-      </div>
-      <div class="card_data">
-        <div class="data">
-          <div class="text">
-            <label class="text_m">The Watercolor Touch</label>
-            <div class="cube text_s">
-              <label class="side front">View Collection</label>
+</div>
+<div class="card_data">
+<div class="data">
+<div class="text">
+<label class="text_m">The Watercolor Touch</label>
+<div class="cube text_s">
+<label class="side front">View Collection</label>
               <label class="side top">A collection of watercolor paintings.</label>
-            </div>
-          </div>
-        </div>
-        <span>Open</span>
-      </div>
-    </div>
+</div>
+</div>
+</div>
+<span>Open</span>
+</div>
+</div>
 
-    <!-- Card 3 -->
-    <div class="card">
-      <div class="card_form">
-        <span>Chromatic Lines</span>
-        <img src="chromatic.png" alt="color pencil" style="width: 100%; height: 100%; object-fit: cover; border-radius: 4px;">
+<!-- Card 3 -->
+<div class="card">
+<div class="card_form">
+<span>Chromatic Lines</span>
+<img src="chromatic.png" alt="color pencil" style="width: 100%; height: 100%; object-fit: cover; border-radius: 4px;">
 
-      </div>
-      <div class="card_data">
-        <div class="data">
-          <div class="text">
-            <label class="text_m">Colored Pencil Explorations</label>
-            <div class="cube text_s">
-              <label class="side front">View Collection</label>
+</div>
+<div class="card_data">
+<div class="data">
+<div class="text">
+<label class="text_m">Colored Pencil Explorations</label>
+<div class="cube text_s">
+<label class="side front">View Collection</label>
               <label class="side top">Exploring the versatility of colored pencils.</label>
-            </div>
-          </div>
-        </div>
-        <span>Open</span>
-      </div>
-    </div>
+</div>
+</div>
+</div>
+<span>Open</span>
+</div>
+</div>
 
-    <!-- Card 4 -->
-    <div class="card">
-      <div class="card_form">
-        <span>Ink Flow</span>
-        <img src="inkflow.png" alt="ink pens" style="width: 100%; height: 100%; object-fit: cover; border-radius: 4px;">
+<!-- Card 4 -->
+<div class="card">
+<div class="card_form">
+<span>Ink Flow</span>
+<img src="inkflow.png" alt="ink pens" style="width: 100%; height: 100%; object-fit: cover; border-radius: 4px;">
 
-      </div>
-      <div class="card_data">
-        <div class="data">
-          <div class="text">
-            <label class="text_m">Drawn in Ink</label>
-            <div class="cube text_s">
-              <label class="side front">View Collection</label>
+</div>
+<div class="card_data">
+<div class="data">
+<div class="text">
+<label class="text_m">Drawn in Ink</label>
+<div class="cube text_s">
+<label class="side front">View Collection</label>
               <label class="side top">A journey through the fluidity of ink.</label>
-            </div>
-          </div>
-        </div>
-        <span>Open</span>
-      </div>
-    </div>
+</div>
+</div>
+</div>
+<span>Open</span>
+</div>
+</div>
 
-    <!-- Card 5 -->
-    <div class="card">
-      <div class="card_form">
-        <span>Shades of Charcoal</span>
-        <img src="charcoal.png" alt="charcoal" style="width: 100%; height: 100%; object-fit: cover; border-radius: 4px;">
+<!-- Card 5 -->
+<div class="card">
+<div class="card_form">
+<span>Shades of Charcoal</span>
+<img src="charcoal.png" alt="charcoal" style="width: 100%; height: 100%; object-fit: cover; border-radius: 4px;">
 
-      </div>
-      <div class="card_data">
-        <div class="data">
-          <div class="text">
-            <label class="text_m">The Charcoal Mark</label>
-            <div class="cube text_s">
-              <label class="side front">View Collection</label>
+</div>
+<div class="card_data">
+<div class="data">
+<div class="text">
+<label class="text_m">The Charcoal Mark</label>
+<div class="cube text_s">
+<label class="side front">View Collection</label>
               <label class="side top">Exploring the depth of charcoal.</label>
-            </div>
-          </div>
-        </div>
-        <span>Open</span>
-      </div>
-    </div>
+</div>
+</div>
+</div>
+<span>Open</span>
+</div>
+</div>
 
-    <!-- Card 6 -->
-    <div class="card">
-      <div class="card_form">
-        <span>The Conte Collection</span>
-        <img src="crayons.png" alt="crayons" style="width: 100%; height: 100%; object-fit: cover; border-radius: 4px;">
+<!-- Card 6 -->
+<div class="card">
+<div class="card_form">
+<span>The Conte Collection</span>
+<img src="crayons.png" alt="crayons" style="width: 100%; height: 100%; object-fit: cover; border-radius: 4px;">
 
-      </div>
-      <div class="card_data">
-        <div class="data">
-          <div class="text">
-            <label class="text_m">The Crayon's Edge</label>
-            <div class="cube text_s">
-              <label class="side front">View Collection</label>
+</div>
+<div class="card_data">
+<div class="data">
+<div class="text">
+<label class="text_m">The Crayon's Edge</label>
+<div class="cube text_s">
+<label class="side front">View Collection</label>
               <label class="side top">The expressive world of conte crayons.</label>
-            </div>
-          </div>
-        </div>
-        <span>Open</span>
-      </div>
-      </div>
-    </div> <!-- End of card-container -->
-  </section> <!-- End of next-section -->
+</div>
+</div>
+</div>
+<span>Open</span>
+</div>
+</div>
+</div> <!-- Moved this closing div tag here -->
 
-  <script>
-    // No active script needed for current functionality
-  </script>
+<script>
+// --- Divider Image Internal Zoom Effect ---
+const dividerInnerImage = document.getElementById('divider-image-inner');
+const zoomThreshold = 100; // Pixels from top to trigger zoom change
+
+window.addEventListener('scroll', () => {
+if (window.scrollY > zoomThreshold) {
+// Scrolled DOWN: Zoom OUT (scale image to normal size - still covers container)
+dividerInnerImage.style.transform = 'scale(1)';
+} else {
+// Scrolled UP (near top): Zoom IN (scale image UP slightly)
+dividerInnerImage.style.transform = 'scale(1.05)'; // Back to default zoomed-in state
+}
+});
+// --- End Divider Image Internal Zoom Effect ---
+</script>
 
 </body>
 </html>
