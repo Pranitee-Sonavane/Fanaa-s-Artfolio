@@ -6,6 +6,7 @@
   <title>Fanaa's Artfolio</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap" rel="stylesheet">
+  <!-- <link rel="stylesheet" href="styles.css"> <-- Removed -->
 
   <style>
     @keyframes slideUp {
@@ -25,60 +26,6 @@
       
       padding: 0;
       box-sizing: border-box;
-    }
-
-    .flip-card {
-      background-color: transparent;
-      width: 190px;
-      height: 254px;
-      perspective: 1000px;
-      font-family: 'Oswald', sans-serif;
-    }
-
-    .title {
-      font-size: 1.2em;
-      font-weight: 700;
-      text-align: center;
-      margin-bottom: 8px;
-    }
-
-    .flip-card-inner {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      text-align: center;
-      transition: transform 0.8s;
-      transform-style: preserve-3d;
-    }
-
-    .flip-card:hover .flip-card-inner {
-      transform: rotateY(180deg);
-    }
-
-    .flip-card-front, .flip-card-back {
-      box-shadow: 0 8px 14px 0 rgba(0,0,0,0.2);
-      position: absolute;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      width: 100%;
-      height: 100%;
-      backface-visibility: hidden;
-      border: 2px solid coral;
-      border-radius: 1rem;
-      overflow: hidden;
-    }
-
-    .flip-card-front {
-      background-color: #fff0e6;
-      color: coral;
-    }
-
-    .flip-card-back {
-      background-color: coral;
-      color: white;
-      transform: rotateY(180deg);
     }
 
     /* Container for the grid of cards */
@@ -209,35 +156,57 @@
       transform: translate3d(0, 0, 1em);
     }
 
-    /* Styles for the divider image effect */
+    /* Wrapper for the sticky effect - Simplified */
+    .sticky-wrapper {
+       /* Keep margin */
+       margin-top: 12rem;
+       margin-bottom: 0;
+       /* Remove height and position relative */
+       /* height: calc(100vh + 50px); */
+       /* position: relative; */
+       /* Add a small initial height to push the image down slightly */
+       padding-bottom: 50px; /* Adjust this value for initial visibility */
+    }
+
+    /* Styles for the STICKY divider image container */
     .divider-container {
-      width: 100vw; /* Force full viewport width */
-      position: relative; /* Needed for horizontal centering trick */
-      left: 50%;
-      transform: translateX(-50%); /* Center the 100vw element */
-      overflow: hidden; /* CRITICAL: Clips the scaled image inside */
-      margin: 12rem 0; /* Vertical spacing, keeps it in flow */
-      line-height: 0; /* Prevent extra space */
-      /* Container itself does NOT move or scale */
+      width: 100%;
+      position: sticky; /* Stick directly within body flow */
+      top: 0; /* Stick to the top */
+      height: 100vh; /* Full height when sticky */
+      overflow: hidden;
+      z-index: 1; /* Behind next section */
+      position: relative; /* Needed for absolute positioning of image */
     }
 
     #divider-image-inner {
       display: block; /* Ensures proper block layout */
       /* Ensure image covers container even when scaled */
-      min-width: 100%;
-      min-height: 100%;
+      /* Position image absolutely within the container */
+      position: absolute;
+      bottom: 0; /* Align to the bottom of the container */
+      left: 0;
+      width: 100%; /* Ensure full width */
+      height: 100%; /* Match container height */
       object-fit: cover; /* Cover the container area */
-      height: auto; /* Maintain aspect ratio (overridden by object-fit if needed) */
-      transform-origin: center center; /* Scale from the center */
-      transition: transform 0.5s ease-out; /* Smooth transition for zoom */
+      transform-origin: center center;
+      /* transition removed as it's not needed for this effect */
       /* Stronger old film / grainy filter */
-      
       filter: contrast(120%) brightness(80%) saturate(150%) hue-rotate(150deg) blur(0.5px);
       mix-blend-mode: screen;
       background-color: #0a0a0a;
-      /* Default state: Start zoomed IN */
-      transform: scale(1.05);
+      /* Default state: Start zoomed IN - REMOVED */
     }
+
+    #next-section {
+      /* Ensure next section is above the sticky divider */
+      position: relative;
+      z-index: 10;
+      background-color: black; /* Ensure solid background to cover image */
+      /* Add negative margin-top to pull it up over the wrapper's padding */
+      margin-top: -50px; /* Should match the padding-bottom of the wrapper */
+    }
+
 
   </style>
 </head>
@@ -272,17 +241,22 @@
 
   
   
+  <!-- Wrapper to control initial height and sticky duration -->
+  <div class="sticky-wrapper">
+    <!-- Divider Image Container (This part becomes sticky) -->
+    <div class="divider-container">
+      <!-- Inner Image -->
+      <img id="divider-image-inner" src="divider.png" alt="Divider">
+    </div>
+  </div> <!-- End sticky-wrapper -->
 
-  <!-- Divider Image Container (Stays fixed in the page flow, full viewport width) -->
-  <div class="divider-container">
-    <!-- Inner Image (This is what scales, but always covers the container) -->
-    <img id="divider-image-inner" src="divider.png" alt="Divider">
-  </div>
-
-  <!-- Container for the 2 cards per row (6 cards total) -->
-  <div id="card-container">
-    <!-- Card 1 -->
-    <div class="card">
+  <!-- Next Section (Appears after sticky-wrapper) -->
+  <section id="next-section" class="bg-black relative z-10 min-h-screen p-10">
+    <h2 class="text-5xl font-bold mb-6 text-center text-white">Artwork Collections</h2>
+    <!-- Container for the 2 cards per row (6 cards total) -->
+    <div id="card-container">
+      <!-- Card 1 -->
+      <div class="card">
       <div class="card_form">
         <span>The Graphite Chronicles</span>
         <img src="graphite.png" alt="Graphite Sketch" style="width: 100%; height: 100%; object-fit: cover; border-radius: 4px;">
@@ -405,24 +379,12 @@
         </div>
         <span>Open</span>
       </div>
-    </div>
-  </div> <!-- Moved this closing div tag here -->
+      </div>
+    </div> <!-- End of card-container -->
+  </section> <!-- End of next-section -->
 
   <script>
-    // --- Divider Image Internal Zoom Effect ---
-    const dividerInnerImage = document.getElementById('divider-image-inner');
-    const zoomThreshold = 100; // Pixels from top to trigger zoom change
-
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > zoomThreshold) {
-        // Scrolled DOWN: Zoom OUT (scale image to normal size - still covers container)
-        dividerInnerImage.style.transform = 'scale(1)';
-      } else {
-        // Scrolled UP (near top): Zoom IN (scale image UP slightly)
-        dividerInnerImage.style.transform = 'scale(1.05)'; // Back to default zoomed-in state
-      }
-    });
-    // --- End Divider Image Internal Zoom Effect ---
+    // No active script needed for current functionality
   </script>
 
 </body>
