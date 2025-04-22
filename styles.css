@@ -29,7 +29,7 @@
   font-size: 1.2em;
   font-weight: 700;
   text-align: center;
-  margin-bottom: 8px;
+  padding-bottom: 20px;
   }
   
   .flip-card-inner {
@@ -200,32 +200,63 @@
   transform: translate3d(0, 0, 1em);
   }
   
-  /* Styles for the divider image effect */
+  /* Styles for the divider image container */
   .divider-container {
-  width: 100vw; /* Force full viewport width */
-  position: relative; /* Needed for horizontal centering trick */
-  left: 50%;
-  transform: translateX(-50%); /* Center the 100vw element */
-  overflow: hidden; /* CRITICAL: Clips the scaled image inside */
-  margin: 12rem 0; /* Vertical spacing, keeps it in flow */
+  position: sticky; /* Make it sticky */
+  top: 0; /* Stick to the top */
+  height: 100vh; /* Occupy full viewport height when sticky */
+  width: 100%; /* Use 100% width */
+  /* Removed left and transform for centering */
+  /* overflow: hidden; Temporarily removed */
   line-height: 0; /* Prevent extra space */
-  /* Container itself does NOT move or scale */
+  z-index: 1; /* Below the content that scrolls over */
   }
   
   #divider-image-inner {
-  display: block; /* Ensures proper block layout */
-  /* Ensure image covers container even when scaled */
-  min-width: 100%;
-  min-height: 100%;
-  object-fit: cover; /* Cover the container area */
-  height: auto; /* Maintain aspect ratio (overridden by object-fit if needed) */
+  display: block; /* Use block layout */
+  width: 100%; /* Fill container width */
+  height: 100%; /* Fill container height */
+  object-fit: cover; /* Cover the area, maintain aspect ratio */
+  /* Removed absolute positioning */
   transform-origin: center center; /* Scale from the center */
   transition: transform 0.5s ease-out; /* Smooth transition for zoom */
   /* Stronger old film / grainy filter */
-  
   filter: contrast(120%) brightness(80%) saturate(150%) hue-rotate(150deg) blur(0.5px);
   mix-blend-mode: screen;
   background-color: #0a0a0a;
-  /* Default state: Start zoomed IN */
-  transform: scale(1.05);
+  transform: scale(1.05); /* Set initial scale */
   }
+
+/* Content Below Divider */
+#content-below-divider {
+  position: relative; /* Needed for z-index stacking */
+  z-index: 2; /* Above the sticky divider */
+  background-color: black; /* This hides the image as it scrolls over */
+  /* padding-top: 1px; /* May not be needed now */
+}
+
+/* Adjust card container margin */
+#card-container {
+  display: flex;
+  padding: 50px; /* Keep padding */
+  flex-wrap: wrap;
+  justify-content: space-between; /* Use space-around or space-evenly for better spacing */
+  width: 100%;
+  /* margin-top: 40px; /* Adjust or remove as needed based on visual */
+}
+
+/* Responsive adjustments for cards */
+@media (max-width: 768px) {
+  .card {
+    width: 100%; /* Stack cards on smaller screens */
+    margin-bottom: 40px; /* Add more space between stacked cards */
+  }
+  #card-container {
+    padding: 20px; /* Reduce padding on smaller screens */
+  }
+  /* Target the h1 elements inside the hero section */
+  section.text-center h1 {
+    font-size: 80px !important; /* Example smaller size, use !important to override Tailwind potentially */
+    line-height: 1 !important; /* Adjust line-height accordingly */
+  }
+}
