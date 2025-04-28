@@ -201,31 +201,32 @@
   }
   
   /* Styles for the divider image container */
-  .divider-container {
+.divider-container {
   position: sticky; /* Make it sticky */
   top: 0; /* Stick to the top */
   height: 100vh; /* Occupy full viewport height when sticky */
   width: 100%; /* Use 100% width */
-  /* Removed left and transform for centering */
-  /* overflow: hidden; Temporarily removed */
   line-height: 0; /* Prevent extra space */
   z-index: 1; /* Below the content that scrolls over */
-  }
-  
-  #divider-image-inner {
+}
+
+/* Styles for the image inside the divider */
+#divider-image-inner {
   display: block; /* Use block layout */
-  width: 100%; /* Fill container width */
+  width: calc(100% - 2cm); /* Take full width minus 1cm gap on left and right */
   height: 100%; /* Fill container height */
   object-fit: cover; /* Cover the area, maintain aspect ratio */
-  /* Removed absolute positioning */
   transform-origin: center center; /* Scale from the center */
   transition: transform 0.5s ease-out; /* Smooth transition for zoom */
-  /* Stronger old film / grainy filter */
   filter: contrast(120%) brightness(80%) saturate(150%) hue-rotate(150deg) blur(0.5px);
   mix-blend-mode: screen;
   background-color: #0a0a0a;
   transform: scale(1.05); /* Set initial scale */
-  }
+  margin-left: 1cm; /* Leave 1cm gap on the left */
+  margin-right: 1cm; /* Leave 1cm gap on the right */
+  border-radius: 15px; /* Round the corners */
+}
+
 
 /* Content Below Divider */
 #content-below-divider {
@@ -260,5 +261,6 @@
     line-height: 1 !important; /* Adjust line-height accordingly */
   }
 }
+
 
 
