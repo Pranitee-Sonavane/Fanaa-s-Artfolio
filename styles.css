@@ -201,6 +201,7 @@
   }
   
   /* Styles for the divider image container */
+<<<<<<< HEAD
   .divider-container {
     position: sticky; /* Make it sticky */
     top: 0; /* Stick to the top */
@@ -227,6 +228,34 @@
     border-radius: 15px; /* Round the corners */
   }
   
+=======
+.divider-container {
+  position: sticky; /* Make it sticky */
+  top: 0; /* Stick to the top */
+  height: 100vh; /* Occupy full viewport height when sticky */
+  width: 100%; /* Use 100% width */
+  line-height: 0; /* Prevent extra space */
+  z-index: 1; /* Below the content that scrolls over */
+}
+
+/* Styles for the image inside the divider */
+#divider-image-inner {
+  display: block; /* Use block layout */
+  width: calc(100% - 2cm); /* Take full width minus 1cm gap on left and right */
+  height: 100%; /* Fill container height */
+  object-fit: cover; /* Cover the area, maintain aspect ratio */
+  transform-origin: center center; /* Scale from the center */
+  transition: transform 0.5s ease-out; /* Smooth transition for zoom */
+  filter: contrast(120%) brightness(80%) saturate(150%) hue-rotate(150deg) blur(0.5px);
+  mix-blend-mode: screen;
+  background-color: #0a0a0a;
+  transform: scale(1.05); /* Set initial scale */
+  margin-left: 1cm; /* Leave 1cm gap on the left */
+  margin-right: 1cm; /* Leave 1cm gap on the right */
+  border-radius: 15px; /* Round the corners */
+}
+
+>>>>>>> e3cddfaa66b2245d8cfb0198f7537ae4c57f212d
 
 /* Content Below Divider */
 #content-below-divider {
@@ -262,6 +291,7 @@
   }
 }
 
+<<<<<<< HEAD
 /* Carousel Styles */
 .carousel-container {
   /* Enable horizontal scrolling */
@@ -322,3 +352,7 @@
   color: #cccccc; /* Lighter gray than default text-gray-300 */
   white-space: pre-line; /* Preserve line breaks from HTML */
 }
+=======
+
+
+>>>>>>> e3cddfaa66b2245d8cfb0198f7537ae4c57f212d
