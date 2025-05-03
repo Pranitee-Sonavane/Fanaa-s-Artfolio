@@ -4,8 +4,11 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Fanaa's Artfolio</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 <script src="https://cdn.tailwindcss.com"></script>
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Lato:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="styles.css">
 
@@ -45,8 +48,24 @@ ARTFOLIO
 <img id="divider-image-inner" src="images/homepage images/divider.png" alt="Divider" style="margin-top: 5cm";>
 </div>
 
-<!-- Content Below Divider (Cards) -->
+<!-- Content Below Divider (Intro, Carousel, About, Cards) -->
 <div id="content-below-divider">
+
+  <!-- Introduction Section -->
+  <section id="introduction" class="py-10 px-6 text-center"> 
+    <h2 class="text-5xl font-bold mb-6 intro-heading"><br>Welcome to My Artfolio !!</h2> 
+    <p class="text-lg text-gray-300 mx-auto intro-text"> 
+      Hey! I’m Pranitee
+
+And this is where I mix things up. I was supposed to build a straight-up portfolio, you know, the usual "clean code, serious vibes" thing. But then I realized – that’s only half of who I am.
+
+ I’m a tech enthusiast and an artist, blending lines of code with splashes of color, and sometimes the brush gets more attention than the keyboard. 🎨✨
+
+So, welcome to my Artfolio! It's a space where logic takes a backseat, and creativity takes the wheel. Bugs might pop up, but they might just get painted over.🖼️💫      
+    </p>
+  </section>
+
+
   <!-- Container for the 2 cards per row (6 cards total) -->
   <div id="card-container">
     <!-- Card 1 -->
@@ -169,9 +188,54 @@ ARTFOLIO
       </div>
     </div>
   </div> <!-- End #card-container -->
+
+  <!-- Carousel Section -->
+  <section id="carousel-section" class="py-16 px-6">
+    <h2 class="text-3xl font-bold text-center mb-8">Top Artworks</h2>
+    <div class="carousel-container overflow-x-auto pb-4">
+      <div class="carousel-track flex space-x-6">
+        <!-- Add 8 images here -->
+        <img src="artwork1.jpg" alt="Artwork 1" class="carousel-image h-64 rounded-lg shadow-lg">
+        <img src="artwork2.jpg" alt="Artwork 2" class="carousel-image h-64 rounded-lg shadow-lg">
+        <img src="artwork3.jpg" alt="Artwork 3" class="carousel-image h-64 rounded-lg shadow-lg">
+        <img src="artwork4.jpg" alt="Artwork 4" class="carousel-image h-64 rounded-lg shadow-lg">
+        <img src="artwork5.jpg" alt="Artwork 5" class="carousel-image h-64 rounded-lg shadow-lg">
+        <img src="artwork6.jpg" alt="Artwork 6" class="carousel-image h-64 rounded-lg shadow-lg">
+        <img src="IMG_20240627_120137.jpg" alt="Artwork 7" class="carousel-image h-64 rounded-lg shadow-lg">
+        <img src="IMG_20240627_120158.jpg" alt="Artwork 8" class="carousel-image h-64 rounded-lg shadow-lg">
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="py-16 px-6 bg-gray-900 text-center">
+    <h2 class="text-3xl font-bold mb-8">About & Contact</h2>
+    <div class="max-w-4xl mx-auto grid md:grid-cols-3 gap-8">
+      <div>
+        <h3 class="text-xl font-semibold mb-3">About Me</h3>
+        <p class="text-gray-400">[Tell visitors about yourself, your passion for art, techniques, etc.]</p>
+      </div>
+      <div>
+        <h3 class="text-xl font-semibold mb-3">Contact Me</h3>
+        <p class="text-gray-400">Interested in a commission or collaboration?</p>
+        <a href="mailto:your.email@example.com" class="text-purple-400 hover:underline">[your.email@example.com]</a>
+        <p class="text-gray-400 mt-2">[Optional: Phone Number]</p>
+      </div>
+      <div>
+        <h3 class="text-xl font-semibold mb-3">Follow Me</h3>
+        <div class="flex justify-center space-x-4">
+          <a href="#" class="text-gray-400 hover:text-white">[Social Media Icon 1]</a>
+          <a href="#" class="text-gray-400 hover:text-white">[Social Media Icon 2]</a>
+          <a href="#" class="text-gray-400 hover:text-white">[Social Media Icon 3]</a>
+          <!-- Add links to your actual social profiles -->
+        </div>
+      </div>
+    </div>
+  </section>
+
 </div> <!-- End #content-below-divider -->
 
-<script src="script.js"></script> <!-- Link external script -->
+<script src="script.js" defer ></script> <!-- Link external script -->
 
 </body>
 </html>

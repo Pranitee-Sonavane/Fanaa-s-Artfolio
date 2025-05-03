@@ -202,30 +202,31 @@
   
   /* Styles for the divider image container */
   .divider-container {
-  position: sticky; /* Make it sticky */
-  top: 0; /* Stick to the top */
-  height: 100vh; /* Occupy full viewport height when sticky */
-  width: 100%; /* Use 100% width */
-  /* Removed left and transform for centering */
-  /* overflow: hidden; Temporarily removed */
-  line-height: 0; /* Prevent extra space */
-  z-index: 1; /* Below the content that scrolls over */
+    position: sticky; /* Make it sticky */
+    top: 0; /* Stick to the top */
+    height: 100vh; /* Occupy full viewport height when sticky */
+    width: 100%; /* Use 100% width */
+    line-height: 0; /* Prevent extra space */
+    z-index: 1; /* Below the content that scrolls over */
   }
   
+  /* Styles for the image inside the divider */
   #divider-image-inner {
-  display: block; /* Use block layout */
-  width: 100%; /* Fill container width */
-  height: 100%; /* Fill container height */
-  object-fit: cover; /* Cover the area, maintain aspect ratio */
-  /* Removed absolute positioning */
-  transform-origin: center center; /* Scale from the center */
-  transition: transform 0.5s ease-out; /* Smooth transition for zoom */
-  /* Stronger old film / grainy filter */
-  filter: contrast(120%) brightness(80%) saturate(150%) hue-rotate(150deg) blur(0.5px);
-  mix-blend-mode: screen;
-  background-color: #0a0a0a;
-  transform: scale(1.05); /* Set initial scale */
+    display: block; /* Use block layout */
+    width: calc(100% - 2cm); /* Take full width minus 1cm gap on left and right */
+    height: 100%; /* Fill container height */
+    object-fit: cover; /* Cover the area, maintain aspect ratio */
+    transform-origin: center center; /* Scale from the center */
+    transition: transform 0.5s ease-out; /* Smooth transition for zoom */
+    filter: contrast(120%) brightness(80%) saturate(150%) hue-rotate(150deg) blur(0.5px);
+    mix-blend-mode: screen;
+    background-color: #0a0a0a;
+    transform: scale(1.05); /* Set initial scale */
+    margin-left: 1cm; /* Leave 1cm gap on the left */
+    margin-right: 1cm; /* Leave 1cm gap on the right */
+    border-radius: 15px; /* Round the corners */
   }
+  
 
 /* Content Below Divider */
 #content-below-divider {
@@ -259,4 +260,65 @@
     font-size: 80px !important; /* Example smaller size, use !important to override Tailwind potentially */
     line-height: 1 !important; /* Adjust line-height accordingly */
   }
+}
+
+/* Carousel Styles */
+.carousel-container {
+  /* Enable horizontal scrolling */
+  overflow-x: auto;
+  /* Hide scrollbar for a cleaner look (optional, browser-dependent) */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* IE and Edge */
+}
+
+.carousel-container::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+.carousel-track {
+  /* Ensure items stay in a single row */
+  display: flex;
+  /* Add some padding at the start and end if needed */
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.carousel-image {
+  /* Prevent images from shrinking */
+  flex-shrink: 0;
+  /* Ensure consistent height */
+  height: 16rem; /* Corresponds to h-64 in Tailwind */
+  /* Maintain aspect ratio */
+  object-fit: cover;
+  /* Add transition for potential hover effects */
+  transition: transform 0.3s ease;
+}
+
+.carousel-image:hover {
+  transform: scale(1.05); /* Slight zoom on hover */
+}
+
+/* Introduction Animation (using Animate.css class added in HTML) */
+/* No extra CSS needed if Animate.css is linked correctly */
+
+/* About Section Styling (mostly handled by Tailwind) */
+#about {
+  /* Add any specific overrides or additions here if needed */
+}
+
+/* Enhanced Introduction Styles */
+.intro-heading {
+  font-family: 'Playfair Display', serif; /* Apply elegant serif font */
+  font-weight: 700; /* Bold weight */
+  color: #e0e0e0; /* Slightly off-white for softer look */
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
+  margin-bottom: 2rem; /* Increase space below heading (Tailwind mb-8 is 2rem) */
+}
+
+.intro-text {
+  font-family: 'Lato', sans-serif; /* Apply clean sans-serif font */
+  font-weight: 400; /* Regular weight */
+  line-height: 1.8; /* Improve readability */
+  color: #cccccc; /* Lighter gray than default text-gray-300 */
+  white-space: pre-line; /* Preserve line breaks from HTML */
 }
