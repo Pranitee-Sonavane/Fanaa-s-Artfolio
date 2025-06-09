@@ -204,7 +204,7 @@
   .divider-container {
     position: sticky; /* Make it sticky */
     top: 0; /* Stick to the top */
-    height: 100vh; /* Occupy full viewport height when sticky */
+    height: 90vh; /* Occupy full viewport height when sticky */
     width: 100%; /* Use 100% width */
     line-height: 0; /* Prevent extra space */
     z-index: 1; /* Below the content that scrolls over */
@@ -218,7 +218,6 @@
     object-fit: cover; /* Cover the area, maintain aspect ratio */
     transform-origin: center center; /* Scale from the center */
     transition: transform 0.5s ease-out; /* Smooth transition for zoom */
-    filter: contrast(120%) brightness(80%) saturate(150%) hue-rotate(150deg) blur(0.5px);
     mix-blend-mode: screen;
     background-color: #0a0a0a;
     transform: scale(1.05); /* Set initial scale */
@@ -350,7 +349,7 @@
   width: 100%;
   height: 100%; /* Ensure image fills the item height */
   object-fit: cover; /* Cover the area, maintain aspect ratio */
-  border-radius: 8px; /* Optional: Add rounded corners like the cards had */
+  border-radius: 9px; /* Optional: Add rounded corners like the cards had */
 }
 @keyframes autoRun {
   from {
@@ -368,7 +367,7 @@
   filter: grayscale(0);
 }
 .slider[reverse="true"] .item {
-  animation: reversePlay 10s linear infinite;
+  animation: reversePlay 8s linear infinite;
 }
 @keyframes reversePlay {
   from {
@@ -391,4 +390,20 @@
   to {
     left: 100%;
   }
+}
+
+.vintage-heading {
+    /* Choose your font-family */
+    font-family: 'Playfair Display', serif; /* Or 'Fraunces', serif; */
+    font-weight: 900; /* For a bolder look, you can adjust this (e.g., 700) */
+    font-size: 3.5em; /* Adjust as needed for impact */
+    color: #aeacac; /* A sophisticated dark color, adjust to your palette */
+    text-align: center; /* Centers the text horizontally */
+    margin-top: 50px; /* Example margin to push it down from the top */
+    margin-bottom: 30px; /* Example margin for spacing below */
+    line-height: 1.2; /* Adjust line height for better readability with large fonts */
+    /* Optional: Add a subtle text-shadow for a more vintage, embossed effect */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); 
+    text-align: center; /* This will center all text and inline elements inside .parent-div */
+
 }
